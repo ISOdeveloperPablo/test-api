@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: pobox_development
+  database: api_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: pobox_test
+  database: api_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: pobox_production
+  database: api_production
   username: pobox
   password: <%= ENV['POBOX_DATABASE_PASSWORD'] %>
