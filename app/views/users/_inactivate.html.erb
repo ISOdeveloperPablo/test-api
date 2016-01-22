@@ -1,0 +1,13 @@
+<div id="<%= 'active_button_' + user.id.to_s %>" class="hidden">
+  <%= form_for user, remote: true, url: user_activate_path(user), method: :put do |f| %>
+    <%= f.text_field :is_activated, value: true, type:"hidden" %>
+    <%= f.submit value:"Activate", class: "btn btn-danger click_activate" %>
+  <% end %>
+</div>
+
+<div id="<%= 'inactive_button_' + user.id.to_s %>">
+  <%= form_for user, remote: true, url: user_activate_path(user), method: :put do |f| %>
+    <%= f.text_field :is_activated, value: false, type:"hidden" %>
+    <%= f.submit value:"Activated", class: "btn btn-success click_deactivate"%>
+  <% end %>
+  </div>

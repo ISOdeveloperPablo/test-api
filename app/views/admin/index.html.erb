@@ -1,0 +1,35 @@
+
+<section class="main-content">
+	<div class="container">
+		<div class="main-wrapper">
+		<div class="row">
+			<div class="employee-table">
+				<table class="table table-bordered user-details-table">
+					<thead>
+						<tr>
+							<th class="name-location-th">Name</th>
+							<th class="name-location-th">Location</th>
+							<th class="options-th">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+            <% @employees.each do |user| %>
+						<tr>
+							<td><%= user.first_name + " " + user.last_name %></td>
+							<td><%= user.po_box.city + ", " + user.po_box.country  %></td>
+							<td>
+								<ul class='button-list'>
+                  <li class='index-button'><%= button_to 'Delete User', admin_path(user), method: :delete, class: "delete-edit btn btn-warning" %></li>
+                  <li class='index-button'><%= button_to 'Edit User', edit_admin_path(user), method: :get, class: "delete-edit btn btn-info" %></li>
+                  <li class='index-button'><%= link_to 'Send SMS', user_text_message_send_path(user), class: "btn", id:"sms-button", method: "put", remote: true %></li>
+                </ul>
+							</td>
+						</tr>
+            <% end %>
+					</tbody>
+				</table>
+			</div><!-- /.col-md-12 -->
+		</div><!-- /.row -->
+		</div><!-- /.main-wrapper -->
+	</div><!-- /.container -->
+</section><!-- /.section main-content -->

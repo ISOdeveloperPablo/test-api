@@ -1,0 +1,50 @@
+
+<section class="main-content">
+	<div class="container">
+		<div class="main-wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-bordered user-details-table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Location</th>
+							<th>Phone</th>
+							<th>PO Box</th>
+              <th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+            <% @users.each do |user| %>
+						<tr>
+							<td><%= user.first_name + " " + user.last_name %></td>
+							<td><%= user.po_box.city + ", " + user.po_box.country  %></td>
+							<td><%= user.phone_number %></td>
+              <td><%= user.po_box.box_number %></td>
+							<td>
+								<ul class='button-list'>
+									<% if current_user.role == "Admin"%>
+		                <li class='index-button'>
+											<% if user.is_activated == false %>
+												<%= render "activate", user: user %>
+											<% else %>
+									  		<%= render "inactivate", user: user %>
+											<% end %>
+		                </li>
+									<% end %>
+									<% if current_user.role == "Admin"%>
+	                  <li class='index-button'><%= button_to 'Delete User', admin_path(user), method: :delete, class: "delete-edit btn btn-warning" %></li>
+	                  <li class='index-button'><%= button_to 'Edit User', edit_admin_path(user), method: :get, class: "delete-edit btn btn-info" %></li>
+									<% end %>
+									<li class='index-button'><%= link_to 'Send SMS', user_text_message_send_path(user), class: "btn", id:"sms-button", method: "put", remote: true %></li>
+                </ul>
+							</td>
+						</tr>
+            <% end %>
+					</tbody>
+				</table>
+			</div><!-- /.col-md-12 -->
+		</div><!-- /.row -->
+		</div><!-- /.main-wrapper -->
+	</div><!-- /.container -->
+</section><!-- /.section main-content -->

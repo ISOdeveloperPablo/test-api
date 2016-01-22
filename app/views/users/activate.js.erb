@@ -1,0 +1,11 @@
+var inactive_button = document.querySelectorAll("#inactive_button_" + <%= @user.id %>)[0];
+var active_button = document.querySelectorAll("#active_button_" + <%= @user.id %>)[0];
+var message = '<div class="alert alert-warning"><strong>Wait!</strong> Only admins can do that</div>'
+
+<% if @user.is_activated == true %>
+  active_button.classList.add("hidden");
+  inactive_button.classList.remove("hidden");
+<% else %>
+  active_button.classList.remove("hidden");
+  inactive_button.classList.add("hidden");
+<% end %>

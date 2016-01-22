@@ -1,0 +1,35 @@
+<section class="main-content">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h2>PO Box Number <%= @po_box.box_number %></h2>
+				<span><%= @po_box.city %>, <%= @po_box.country %></span>
+				<div class="main-wrapper scrollbar-wrapper">
+					<ul class="list-unstyled users-list">
+						<% @po_box.users.each do |user| %>
+						<!-- Start User Box -->
+						<li class="list-unstyled users-list">
+							<div class="row">
+								<div style="padding-top: 0;" class="user-box">
+									<div class="col-md-9">
+										<%= image_tag "avatar-1.png" %>
+										<div class="user-details">
+											<h4><%= user.first_name + " " + user.last_name %></h4>
+											<p><%= user.phone_number %></p>
+										</div>
+										<%= link_to 'Send SMS', user_text_message_send_path(user), class: "btn", id:"sms-button2", method: "put", remote: true %>
+									</div>
+								</div>
+								<div>
+								</li>
+								<!-- End User Box -->
+								<% end %>
+							</ul>
+
+						</div><!-- /.main-wrapper -->
+					</div>
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</div>
+	</div>
+</section><!-- /.section main-content -->

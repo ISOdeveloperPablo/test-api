@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pobox</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-6">
+          <% if !current_user.nil? %>
+            <%= link_to image_tag("logo-small.png", id: "logo-main",width:"140", alt:"Logo"), unauthenticated_root_path %>
+          <% else %>
+            <%= link_to image_tag("logo-small.png", id: "logo-main",width:"140", alt:"Logo"), authenticated_root_path %>
+          <% end %>
+        </div>
+        <% if !current_user.nil? %>
+  			<div class="col-md-6">
+  				<div class="top-profile">
+            <%= link_to current_user.first_name + " " + current_user.last_name, user_path(current_user) %>
+  				</div>
+  			</div>
+        <% end %>
+  		</div>
+  	</div>
+  	<nav id="navbar-primary" class="navbar navbar-default" role="navigation">
+  		<div class="container">
+  			<div class="navbar-header">
+  				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-primary-collapse">
+  					<span class="sr-only">Toggle navigation</span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  				</button>
+  			</div>
+  			<div class="collapse navbar-collapse" id="navbar-primary-collapse">
+  				<ul class="nav navbar-nav right">
+            <%- if current_user -%>
+            <%- if current_user.role != "Recipient" -%>
+              <li><%= link_to "Client Info", authenticated_root_path %></li>
+              <li><%= link_to "Po-Boxes", po_boxes_path %></li>
+              <li><%= link_to "New Po-Box", new_po_box_path %></li>
+              <%- if current_user.role == "Admin" -%>
+                <li><%= link_to "View Employees", admin_index_path %></li>
+                <li><%= link_to "Add Users", new_admin_path %></li>
+              <% end %>
+            <% end %>
+          <% end %>
+
+            <%- if current_user -%>
+              <li><%= link_to 'Edit profile', edit_user_registration_path(current_user) %></li>
+
+              <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+            <%- else -%>
+              <li><%= link_to 'Sign In', new_user_session_path %></li>
+              <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <%- end -%>
+  				</ul>
+  			</div><!-- /.navbar-collapse -->
+  		</div><!-- /.container-fluid -->
+  	</nav>
+  </header><!-- header -->
+
+
+
+
+  <%- flash.each do |key, value| -%>
+    <div class="alert-box <%= key %>">
+      <%= value %>
+    </div>
+  <%- end -%>
+
+  <%= yield %>
+
+  <%= javascript_include_tag 'application' %>
+  <%= yield :extra_footer %>
+
+</body>
+<footer>
+
+</footer>
+</html>

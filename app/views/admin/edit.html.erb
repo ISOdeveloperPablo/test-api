@@ -1,0 +1,80 @@
+<section class="title">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Edit</h1>
+			</div>
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+</section><!-- /.section title -->
+
+<section class="main-content">
+<div class='col-md-offset-3 col-md-6'>
+
+	<%= form_for @user, url: admin_path(@user)  do |f| %>
+	<div class="login-wrapper">
+
+	<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-user"></i></span>
+			<!-- <input id="name" type="text" class="form-control" name="name" value="" placeholder="First Name"> -->
+			<%= f.text_field :first_name, class: "form-control", placeholder: "First Name" %>
+	</div>
+
+	<div class="input-group">
+		<span class="input-group-addon"><i class="fa fa-user"></i></span>
+		<!-- <input id="name" type="text" class="form-control" name="name" value="" placeholder="Last Name"> -->
+		<%= f.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
+	</div>
+
+	<div class="input-group">
+		<span class="input-group-addon"><i class="fa fa-user"></i></span>
+		<!-- <input id="name" type="text" class="form-control" name="name" value="" placeholder="Last Name"> -->
+		<%= f.text_field :country_code, class: "form-control", placeholder: "Country code" %>
+
+		<span class="input-group-addon"></span>
+		<!-- <input id="name" type="text" class="form-control" name="name" value="" placeholder="Last Name"> -->
+		<%= f.text_field :phone_number, class: "form-control", placeholder: "Phone Number" %>
+	</div>
+
+	<div class="input-group">
+
+		<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+		<!-- <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email"> -->
+		<%= f.email_field :email, class: "form-control", placeholder: "Email" %>
+	</div>
+	<div class="input-group">
+		<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+		<!-- <input id="password" type="password" class="form-control" name="password" placeholder="Password"> -->
+		<%= f.password_field :password, class: "form-control", placeholder: "Password", autocomplete: "off" %>
+
+	</div>
+	<div class="input-group">
+		<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+		<!-- <input id="re-password" type="password" class="form-control" name="re-password" placeholder="Re-Password"> -->
+		<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Re-enter Password", autocomplete: "off" %>
+	</div>
+
+
+	<div class="input-group" id="dropDown">
+		<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+		<!-- <input id="re-password" type="password" class="form-control" name="re-password" placeholder="Re-Password"> -->
+		<%= f.collection_select(:po_box_id, PoBox.all, :id, :box_number, options = {include_blank: "Select"}, html_options = {class:"form-control"}) %>
+	</div>
+
+	<div class="input-group" id="dropDown">
+		<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+		<!-- <input id="re-password" type="password" class="form-control" name="re-password" placeholder="Re-Password"> -->
+		<%= f.select :role, @roles%>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3 signin-btn">
+			<!-- <a class="btn btn-primary btn-lg btn-block" href="client-profile.html">Sign Up</a> -->
+			<%= f.submit "Edit Employee", class: "btn btn-primary btn-lg btn-block", id: "signUpSubmit", name: "subaction", value: "Update User"%>
+		</div>
+	</div>
+</div>
+
+	<% end %>
+</div>
+</section><!-- /.section main-content -->

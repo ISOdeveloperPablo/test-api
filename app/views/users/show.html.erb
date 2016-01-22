@@ -1,0 +1,25 @@
+<p class='user-show-title'>
+  <%= @user.first_name + ' '+ @user.last_name  %>
+</p>
+
+<p class='user-show-details'>
+  Email: <%= @user.email %>
+</p>
+<p class='user-show-details'>
+  Phone number: <%= @user.country_code + ' ' + @user.phone_number %>
+</p>
+<p class='user-show-details'>
+  City: <%= @user.po_box.city %>
+</p>
+<p class='user-show-details'>
+  Country: <%= PoBox.find(@user.po_box_id).country %>
+</p>
+<p class='user-show-details'>
+  Po-Box: <%= PoBox.find(@user.po_box_id).box_number %>
+</p>
+<p class='user-show-details'>
+  Role: <%= @user.role %>
+</p>
+<p class='user-show-details'>
+  <%= link_to 'Edit profile', edit_user_registration_path(current_user) %>
+</p>
